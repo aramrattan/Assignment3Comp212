@@ -23,6 +23,7 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
         {
             getNextId();
         }
+        //Add a learner button
         private void btnCreate_Click(object sender, EventArgs e)
         {
             try
@@ -37,6 +38,7 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
                 aDBC.ArlinaTBs.Add(newRow);
                 aDBC.SaveChanges();
                 MessageBox.Show("Learner Added");
+                clearBoxes();
             }
             catch (Exception error)
             {
@@ -73,6 +75,7 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
 
                     }
                 }
+                MessageBox.Show("Learner Found");
             }
             catch (Exception error)
             {
@@ -109,7 +112,7 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
                     aDBC.SaveChanges();*/
                     MessageBox.Show("Learner Updated");
                 }
-
+                clearBoxes();
             }
             catch (Exception error)
             {
@@ -136,9 +139,9 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
                     dbRow.SaveChanges();
                     /*aDBC.ArlinaTBs.Add(deleteRow);
                     aDBC.SaveChanges();*/
-                    MessageBox.Show("Learner Updated");
+                    MessageBox.Show("Learner Deleted");
                 }
-
+                clearBoxes();
             }
             catch (Exception error)
             {
@@ -187,13 +190,6 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
             tbLearnerId.Focus();
            getNextId();
         }
-
-
-
-
-
-
-
 
     }
 }
