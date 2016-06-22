@@ -18,6 +18,7 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
         {
             InitializeComponent();
         }
+        //Method so when the form loads the Next value for the learnerId is there
         private void Form1_Load(object sender, EventArgs e)
         {
             getNextId();
@@ -44,8 +45,41 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
 
 
         }
+        //The find learner btn 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //creating object of ArlinaDBEntities 
+                using (var dbContent = new ArlinaDBEntities())
+                {
+                    //grabbing the row from the table that matches the id
+                    var queryResults = from row in dbContent.ArlinaTBs
+                                where row.learnerId.ToString() == tbLearnerId.Text
+                                select new
+                                {
+                                   learnerName = row.learnerName,
+                                   learnerAge = row.learnerAge, 
+                                   favMovie = row.favMovie,
+                                   favDrink = row.favDrink
+                                };
+                    //Assigning each itme in queryResults to assosiated Textbox
+                    foreach (var item in queryResults)
+                    {
+                        tbLearnerName.Text = item.learnerName;
+                        tbLearnerAge.Text = item.learnerAge.ToString();
+                        tbFavMovie.Text = item.favMovie;
+                        tbFavDrink.Text = item.favDrink;
 
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+            }
 
+        }
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -59,15 +93,15 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
             try
             {
                 int id;
-                //create a connection with ArlinaDB database
+                //create a ArlinaDBEntities object
                 ArlinaDBEntities aDBC = new ArlinaDBEntities();
-                ArlinaTB newRow = new ArlinaTB();
+                
                 //getting the highest Id number already used
                 //making id equal to the next value that the table will automatically generate 
                 var idList = from ids in aDBC.ArlinaTBs select ids.learnerId;
                 id = Convert.ToInt32(idList.Max())+1;
                 MessageBox.Show("Value Recieved");//used to check if value was grabbed
-               
+               //Assigning value to textbox
                 tbLearnerId.Text = id.ToString();
             }
             catch (Exception ex)
@@ -77,6 +111,7 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
 
 
         }
+        //Used to grab the 
         private void clearBoxes()
         {
             tbLearnerId.Text = "";
@@ -87,6 +122,34 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
             tbLearnerId.Focus();
            getNextId();
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ArlinaDBEntities aDBC = new ArlinaDBEntities();
+                ArlinaTB newRow = new ArlinaTB();
+                newRow.learnerName = tbLearnerName.Text;
+                newRow.learnerAge = Convert.ToInt32(tbLearnerAge.Text);
+                newRow.favMovie = tbFavMovie.Text;
+                newRow.favDrink = tbFavDrink.Text;
+
+                aDBC.ArlinaTBs.Add(newRow);
+                aDBC.SaveChanges();
+                MessageBox.Show("Learner Added");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
 
 
 

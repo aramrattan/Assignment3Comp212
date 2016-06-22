@@ -93,6 +93,7 @@
             this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "Find Learner";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnUpdate
             // 
@@ -102,6 +103,7 @@
             this.btnUpdate.TabIndex = 2;
             this.btnUpdate.Text = "Update Learner";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
             // 
@@ -111,6 +113,7 @@
             this.btnDelete.TabIndex = 1;
             this.btnDelete.Text = "Delete Learner";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnCreate
             // 
