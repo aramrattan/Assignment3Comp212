@@ -147,6 +147,11 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
             {
                 MessageBox.Show(error.ToString());
             }
+        } 
+        //btnClear Functionality
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            clearBoxes();
         }
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -190,6 +195,8 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
             tbLearnerId.Focus();
            getNextId();
         }
+
+
 
     }
 }
