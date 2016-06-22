@@ -80,6 +80,43 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
             }
 
         }
+        //method to update an exsiting record
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ArlinaDBEntities aDBC = new ArlinaDBEntities();
+                ArlinaTB newRow = new ArlinaTB();
+                //grabbing the row from the table that matches the id
+                using (aDBC)
+                    newRow = aDBC.ArlinaTBs.Where(id => id.learnerId.ToString() == tbLearnerId.Text).FirstOrDefault<ArlinaTB>();
+                //Changing the fields of the row if the row grabbed is not empty
+                if(newRow != null)
+                {
+                    newRow.learnerName = tbLearnerName.Text;
+                    newRow.learnerAge = Convert.ToInt32(tbLearnerAge.Text);
+                    newRow.favMovie = tbFavMovie.Text;
+                    newRow.favDrink = tbFavDrink.Text;
+                }
+                //Saving the changed row 
+                using (var dbRow = new ArlinaDBEntities())
+                {
+                    //mark the row as modified
+                    dbRow.Entry(newRow).State = EntityState.Modified;
+                    //Save Changes
+                    dbRow.SaveChanges();
+                    /*aDBC.ArlinaTBs.Add(newRow);
+                    aDBC.SaveChanges();*/
+                    MessageBox.Show("Learner Updated");
+                }
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+            }
+
+        }
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -123,31 +160,8 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
            getNextId();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ArlinaDBEntities aDBC = new ArlinaDBEntities();
-                ArlinaTB newRow = new ArlinaTB();
-                newRow.learnerName = tbLearnerName.Text;
-                newRow.learnerAge = Convert.ToInt32(tbLearnerAge.Text);
-                newRow.favMovie = tbFavMovie.Text;
-                newRow.favDrink = tbFavDrink.Text;
 
-                aDBC.ArlinaTBs.Add(newRow);
-                aDBC.SaveChanges();
-                MessageBox.Show("Learner Added");
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.ToString());
-            }
-        }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-
-        }
 
 
 
