@@ -105,7 +105,7 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
                     dbRow.Entry(newRow).State = EntityState.Modified;
                     //Save Changes
                     dbRow.SaveChanges();
-                    /*aDBC.ArlinaTBs.Add(newRow);
+                    /*aDBC.ArlinaTBs.Add(deleteRow);
                     aDBC.SaveChanges();*/
                     MessageBox.Show("Learner Updated");
                 }
@@ -116,6 +116,34 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
                 MessageBox.Show(error.ToString());
             }
 
+        }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ArlinaDBEntities aDBC = new ArlinaDBEntities();
+                ArlinaTB deleteRow = new ArlinaTB();
+                //grabbing the row from the table that matches the id
+                using (aDBC)
+                    deleteRow = aDBC.ArlinaTBs.Where(id => id.learnerId.ToString() == tbLearnerId.Text).FirstOrDefault<ArlinaTB>();
+               
+                //Deleting the selected row 
+                using (var dbRow = new ArlinaDBEntities())
+                {
+                    //mark the row as modified
+                    dbRow.Entry(deleteRow).State = EntityState.Deleted;
+                    //Save Changes
+                    dbRow.SaveChanges();
+                    /*aDBC.ArlinaTBs.Add(deleteRow);
+                    aDBC.SaveChanges();*/
+                    MessageBox.Show("Learner Updated");
+                }
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+            }
         }
         private void btnClose_Click(object sender, EventArgs e)
         {
