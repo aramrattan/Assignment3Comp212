@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ArlinaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ArlinaTB">
+          <Key>
+            <PropertyRef Name="learnerId" />
+          </Key>
+          <Property Name="learnerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="learnerName" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="learnerAge" Type="int" Nullable="false" />
+          <Property Name="favMovie" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="favDrink" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ArlinaDBModelStoreContainer">
+          <EntitySet Name="ArlinaTB" EntityType="Self.ArlinaTB" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ArlinaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ArlinaTB">
+          <Key>
+            <PropertyRef Name="learnerId" />
+          </Key>
+          <Property Name="learnerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="learnerName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="learnerAge" Type="Int32" Nullable="false" />
+          <Property Name="favMovie" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="favDrink" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ArlinaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ArlinaTBs" EntityType="Self.ArlinaTB" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ArlinaDBModelStoreContainer" CdmEntityContainer="ArlinaDBEntities">
+          <EntitySetMapping Name="ArlinaTBs">
+            <EntityTypeMapping TypeName="ArlinaDBModel.ArlinaTB">
+              <MappingFragment StoreEntitySet="ArlinaTB">
+                <ScalarProperty Name="learnerId" ColumnName="learnerId" />
+                <ScalarProperty Name="learnerName" ColumnName="learnerName" />
+                <ScalarProperty Name="learnerAge" ColumnName="learnerAge" />
+                <ScalarProperty Name="favMovie" ColumnName="favMovie" />
+                <ScalarProperty Name="favDrink" ColumnName="favDrink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
