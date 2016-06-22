@@ -18,17 +18,29 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
         {
             InitializeComponent();
         }
-
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            getNextId();
+        }
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            ArlinaDBEntities aDBC = new ArlinaDBEntities();
-            ArlinaTB newRow = new ArlinaTB();
-            newRow.learnerName = tbLearnerName.Text;
-            newRow.learnerAge = Convert.ToInt32(tbLearnerAge.Text);
-            newRow.favMovie = tbFavMovie.Text;
-            newRow.favDrink = tbFavDrink.Text;
+            try
+            {
+                ArlinaDBEntities aDBC = new ArlinaDBEntities();
+                ArlinaTB newRow = new ArlinaTB();
+                newRow.learnerName = tbLearnerName.Text;
+                newRow.learnerAge = Convert.ToInt32(tbLearnerAge.Text);
+                newRow.favMovie = tbFavMovie.Text;
+                newRow.favDrink = tbFavDrink.Text;
 
-            aDBC.ArlinaTBs.Add(newRow);
+                aDBC.ArlinaTBs.Add(newRow);
+                aDBC.SaveChanges();
+                MessageBox.Show("Learner Added");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+            }
 
 
         }
@@ -41,7 +53,7 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
 
 
         //Method to get the next automated value for the learnerID  from the database
-       /* private void getNextId()
+       private void getNextId()
         {
 
             try
@@ -51,12 +63,11 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
                 ArlinaDBEntities aDBC = new ArlinaDBEntities();
                 ArlinaTB newRow = new ArlinaTB();
                 //getting the highest Id number already used
-                id = aDBC.ArlinaTBs.learnerId.Max(learnerId);
-
                 //making id equal to the next value that the table will automatically generate 
-                id = (int)cmd.ExecuteScalar() + 1;
-                //MessageBox.Show("Value Recieved");//used to check if value was grabbed
-                conn.Close();
+                var idList = from ids in aDBC.ArlinaTBs select ids.learnerId;
+                id = Convert.ToInt32(idList.Max())+1;
+                MessageBox.Show("Value Recieved");//used to check if value was grabbed
+               
                 tbLearnerId.Text = id.ToString();
             }
             catch (Exception ex)
@@ -65,7 +76,7 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
             }
 
 
-        }*/
+        }
         private void clearBoxes()
         {
             tbLearnerId.Text = "";
@@ -74,8 +85,10 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
             tbFavMovie.Text = "";
             tbFavDrink.Text = "";
             tbLearnerId.Focus();
-           // getNextId();
+           getNextId();
         }
+
+
 
     }
 }

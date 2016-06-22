@@ -230,6 +230,7 @@
             this.Controls.Add(this.gbLearnerInfo);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.gbManageLearners.ResumeLayout(false);
             this.gbLearnerInfo.ResumeLayout(false);
             this.gbLearnerInfo.PerformLayout();
