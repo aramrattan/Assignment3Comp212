@@ -32,5 +32,50 @@ namespace ArlinaRamrattanM16_Lab3_Ex2
 
 
         }
+
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
+        //Method to get the next automated value for the learnerID  from the database
+       /* private void getNextId()
+        {
+
+            try
+            {
+                int id;
+                //create a connection with ArlinaDB database
+                ArlinaDBEntities aDBC = new ArlinaDBEntities();
+                ArlinaTB newRow = new ArlinaTB();
+                //getting the highest Id number already used
+                id = aDBC.ArlinaTBs.learnerId.Max(learnerId);
+
+                //making id equal to the next value that the table will automatically generate 
+                id = (int)cmd.ExecuteScalar() + 1;
+                //MessageBox.Show("Value Recieved");//used to check if value was grabbed
+                conn.Close();
+                tbLearnerId.Text = id.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+
+        }*/
+        private void clearBoxes()
+        {
+            tbLearnerId.Text = "";
+            tbLearnerName.Text = "";
+            tbLearnerAge.Text = "";
+            tbFavMovie.Text = "";
+            tbFavDrink.Text = "";
+            tbLearnerId.Focus();
+           // getNextId();
+        }
+
     }
 }
